@@ -35,7 +35,7 @@ services:
     image: nginx:alpine
     container_name: mfe-gateway-prod
     ports:
-      - "80:80"
+      - "4200:80"
     volumes:
       - ./nginx/gateway.conf:/etc/nginx/conf.d/default.conf
     depends_on:

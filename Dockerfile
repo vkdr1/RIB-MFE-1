@@ -4,7 +4,7 @@ ARG PROJECT_NAME
 FROM node:20-alpine AS shared-ui-builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 COPY . .
 RUN npm run build:shared-ui
 
@@ -13,7 +13,7 @@ FROM node:20-alpine AS app-builder
 ARG PROJECT_NAME
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 COPY . .
 COPY --from=shared-ui-builder /app/dist/shared-ui ./dist/shared-ui
 RUN npm run build:${PROJECT_NAME}
