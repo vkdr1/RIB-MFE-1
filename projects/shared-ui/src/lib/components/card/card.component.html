@@ -1,8 +1,10 @@
 <div class="lib-card" [class]="'lib-card--' + elevation">
-  <div class="lib-card__header" *ngIf="title || subtitle">
-    <h3 class="lib-card__title" *ngIf="title">{{ title }}</h3>
-    <p class="lib-card__subtitle" *ngIf="subtitle">{{ subtitle }}</p>
-  </div>
+  @if (title || subtitle) {
+    <div class="lib-card__header">
+      @if (title) { <h3 class="lib-card__title">{{ title }}</h3> }
+      @if (subtitle) { <p class="lib-card__subtitle">{{ subtitle }}</p> }
+    </div>
+  }
   <div class="lib-card__content">
     <ng-content></ng-content>
   </div>
