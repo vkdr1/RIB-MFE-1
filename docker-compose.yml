@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  shell:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_NAME: shell
+    container_name: mfe-shell-prod
+    networks:
+      - mfe-network
+
+  login:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_NAME: login
+    container_name: mfe-login-prod
+    networks:
+      - mfe-network
+
+  user-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_NAME: user-dashboard
+    container_name: mfe-user-dashboard-prod
+    networks:
+      - mfe-network
+
+  gateway:
+    image: nginx:alpine
+    container_name: mfe-gateway-prod
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/gateway.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - shell
+      - login
+      - user-dashboard
+    networks:
+      - mfe-network
+
+networks:
+  mfe-network:
+    driver: bridge
+

@@ -1,0 +1,11 @@
+<nav class="menu">
+  <ul>
+    <li *ngFor="let item of model">
+      <a [routerLink]="item.routerLink" routerLinkActive="active">
+        <span class="menu-icon" *ngIf="item.icon">{{ item.icon }}</span>
+        <span class="menu-label">{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+

@@ -1,0 +1,8 @@
+<div class="layout-wrapper">
+  <app-topbar (menuToggle)="toggleSidebar()"></app-topbar>
+  <app-sidebar [visible]="sidebarVisible"></app-sidebar>
+  <div class="layout-main" [class.sidebar-hidden]="!sidebarVisible">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

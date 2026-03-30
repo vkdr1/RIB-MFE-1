@@ -1,0 +1,17 @@
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-main {
+  margin-left: 250px;
+  margin-top: 60px;
+  padding: 2rem;
+  transition: margin-left 0.3s;
+
+  &.sidebar-hidden {
+    margin-left: 0;
+  }
+}
+
