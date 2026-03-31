@@ -1,11 +1,17 @@
 <nav class="menu">
-  <ul>
-    <li *ngFor="let item of model">
-      <a [routerLink]="item.routerLink" routerLinkActive="active">
-        <span class="menu-icon" *ngIf="item.icon">{{ item.icon }}</span>
-        <span class="menu-label">{{ item.label }}</span>
-      </a>
-    </li>
-  </ul>
+  @if (isAuthenticated()) {
+    <ul>
+      @for (item of authenticatedItems; track item.routerLink) {
+        <li>
+          <a [routerLink]="item.routerLink" routerLinkActive="active">
+            @if (item.icon) {
+              <span class="menu-icon">{{ item.icon }}</span>
+            }
+            <span class="menu-label">{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  }
 </nav>
 

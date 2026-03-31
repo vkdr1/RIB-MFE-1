@@ -1,7 +1,13 @@
 <div class="layout-wrapper">
   <app-topbar (menuToggle)="toggleSidebar()"></app-topbar>
-  <app-sidebar [visible]="sidebarVisible"></app-sidebar>
-  <div class="layout-main" [class.sidebar-hidden]="!sidebarVisible">
+
+  @if (isAuthenticated()) {
+    <app-sidebar [visible]="sidebarVisible"></app-sidebar>
+  }
+
+  <div class="layout-main"
+       [class.sidebar-hidden]="!sidebarVisible"
+       [class.no-sidebar]="!isAuthenticated()">
     <router-outlet></router-outlet>
   </div>
 </div>

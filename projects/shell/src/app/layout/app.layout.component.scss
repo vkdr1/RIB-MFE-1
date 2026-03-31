@@ -10,8 +10,15 @@
   padding: 2rem;
   transition: margin-left 0.3s;
 
+  // Sidebar toggled off by the user (authenticated, but collapsed)
   &.sidebar-hidden {
     margin-left: 0;
+  }
+
+  // Not authenticated — no sidebar rendered at all, fill full width
+  &.no-sidebar {
+    margin-left: 0;
+    padding: 0;  // login page manages its own padding/centering
   }
 }
 
