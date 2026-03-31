@@ -4,6 +4,7 @@ import { AppLayoutComponent } from './layout/app.layout.component';
 import { authGuard, guestGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
+  // Shell layout wraps only login & notfound — routes that don't own their own full layout
   {
     path: '',
     component: AppLayoutComponent,
@@ -21,17 +22,18 @@ export const routes: Routes = [
           loadRemoteModule('login', './Component').then((m) => m.AppComponent),
       },
       {
-        // Protected: unauthenticated users are redirected to login
-        path: 'dashboard',
-        canActivate: [authGuard],
-        loadComponent: () =>
-          loadRemoteModule('user-dashboard', './Component').then((m) => m.AppComponent),
-      },
-      {
         path: 'notfound',
         loadComponent: () => import('./pages/notfound/notfound.component').then(m => m.NotfoundComponent)
       }
     ]
+  },
+  {
+    // Dashboard renders its own full layout (header + sidebar + content),
+    // so it must sit outside AppLayoutComponent to avoid a double layout.
+    path: 'dashboard',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      loadRemoteModule('user-dashboard', './Component').then((m) => m.AppComponent),
   },
   {
     path: '**',
