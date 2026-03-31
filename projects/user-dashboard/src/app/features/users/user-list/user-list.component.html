@@ -1,0 +1,86 @@
+<!-- Toast notification -->
+@if (toast) {
+  <div class="ul-toast" [class.ul-toast--error]="toast.type === 'error'">
+    {{ toast.message }}
+  </div>
+}
+
+<!-- User form dialog -->
+@if (showForm) {
+  <app-user-form
+    [user]="editingUser"
+    (saved)="onFormSaved($event)"
+    (cancelled)="closeForm()">
+  </app-user-form>
+}
+
+<!-- Delete confirmation dialog -->
+@if (confirmDeleteId) {
+  <div class="ul-overlay" (click)="cancelDelete()"></div>
+  <div class="ul-confirm" role="alertdialog">
+    <p class="ul-confirm__msg">Are you sure you want to delete this user?<br><small>This action cannot be undone.</small></p>
+    <div class="ul-confirm__actions">
+      <lib-button label="Cancel"  type="secondary" (onClick)="cancelDelete()"></lib-button>
+      <lib-button label="Delete"  type="danger"    (onClick)="confirmDelete()"></lib-button>
+    </div>
+  </div>
+}
+
+<!-- Page header -->
+<div class="ul-page">
+  <div class="ul-page__header">
+    <div>
+      <h1 class="ul-page__title">User Management</h1>
+      <p class="ul-page__subtitle">Manage system users and their access roles</p>
+    </div>
+    <lib-button label="+ Add New User" type="primary" (onClick)="openAddDialog()"></lib-button>
+  </div>
+
+  <!-- Loading state -->
+  @if (loading) {
+    <div class="ul-loading">Loading users…</div>
+  }
+
+  <!-- Empty state -->
+  @if (!loading && users.length === 0) {
+    <div class="ul-empty">
+      <span class="ul-empty__icon">👥</span>
+      <p>No users found. Click "Add New User" to get started.</p>
+    </div>
+  }
+
+  <!-- User table -->
+  @if (!loading && users.length > 0) {
+    <div class="ul-table-wrap">
+      <table class="ul-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Created</th>
+            <th class="ul-table__actions-col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users; track user.id) {
+            <tr class="ul-table__row">
+              <td><strong>{{ user.name }}</strong></td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone }}</td>
+              <td><span class="ul-badge" [class]="'ul-badge--' + user.role.toLowerCase()">{{ user.role }}</span></td>
+              <td class="ul-table__date">{{ user.createdAt | date:'mediumDate' }}</td>
+              <td class="ul-table__actions">
+                <button class="ul-btn ul-btn--edit"   (click)="openEditDialog(user)"  title="Edit user">✏ Edit</button>
+                <button class="ul-btn ul-btn--delete" (click)="askDelete(user.id)"    title="Delete user">🗑 Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="ul-count">{{ users.length }} user{{ users.length !== 1 ? 's' : '' }} total</p>
+  }
+</div>
+

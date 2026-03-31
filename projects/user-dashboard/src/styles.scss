@@ -1,7 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
-* {
+/* ── Global reset & base ─────────────────────────────────────────────────── */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  background: #f1f5f9;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar styling ───────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── Shared-ui component overrides ──────────────────────────────────────── */
+.lib-button {
+  padding: 0.5rem 1.1rem;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: filter 0.15s, box-shadow 0.15s;
+
+  &:hover:not(:disabled) { filter: brightness(0.92); }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  &--primary   { background: #1565c0; color: #fff; }
+  &--secondary { background: #e2e8f0; color: #334155; }
+  &--success   { background: #16a34a; color: #fff; }
+  &--danger    { background: #dc2626; color: #fff; }
+
+  &--small  { padding: 0.3rem 0.7rem;  font-size: 0.78rem; }
+  &--medium { padding: 0.5rem 1.1rem;  font-size: 0.875rem; }
+  &--large  { padding: 0.65rem 1.5rem; font-size: 1rem; }
+}
+
+.lib-card {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+
+  &--low    { box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  &--medium { box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
+  &--high   { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+  &__header { padding: 1rem 1.25rem 0; }
+  &__title  { font-size: 0.875rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 0.2rem; }
+  &__subtitle { font-size: 0.8rem; color: #94a3b8; margin: 0; }
+  &__content  { padding: 1rem 1.25rem 1.25rem; }
 }
 

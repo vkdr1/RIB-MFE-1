@@ -1,0 +1,59 @@
+<!-- Overlay backdrop -->
+<div class="uf-overlay" (click)="onCancel()"></div>
+
+<!-- Dialog panel -->
+<div class="uf-dialog" role="dialog" [attr.aria-label]="isEditMode ? 'Edit User' : 'New User'">
+  <div class="uf-dialog__header">
+    <h2 class="uf-dialog__title">{{ isEditMode ? 'Edit User' : 'Add New User' }}</h2>
+    <button class="uf-dialog__close" (click)="onCancel()" aria-label="Close">✕</button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="uf-dialog__body" novalidate>
+    <!-- Name -->
+    <div class="uf-field">
+      <label class="uf-label" for="uf-name">Full Name <span class="uf-required">*</span></label>
+      <input id="uf-name" class="uf-input" [class.uf-input--error]="nameCtrl.invalid && nameCtrl.touched"
+             type="text" formControlName="name" placeholder="e.g. Alice Johnson" autocomplete="name" />
+      @if (nameCtrl.invalid && nameCtrl.touched) {
+        <span class="uf-error">Name is required (min. 2 characters).</span>
+      }
+    </div>
+
+    <!-- Email -->
+    <div class="uf-field">
+      <label class="uf-label" for="uf-email">Email <span class="uf-required">*</span></label>
+      <input id="uf-email" class="uf-input" [class.uf-input--error]="emailCtrl.invalid && emailCtrl.touched"
+             type="email" formControlName="email" placeholder="alice@example.com" autocomplete="email" />
+      @if (emailCtrl.invalid && emailCtrl.touched) {
+        <span class="uf-error">A valid email address is required.</span>
+      }
+    </div>
+
+    <!-- Phone -->
+    <div class="uf-field">
+      <label class="uf-label" for="uf-phone">Phone <span class="uf-required">*</span></label>
+      <input id="uf-phone" class="uf-input" [class.uf-input--error]="phoneCtrl.invalid && phoneCtrl.touched"
+             type="tel" formControlName="phone" placeholder="+1-555-0100" autocomplete="tel" />
+      @if (phoneCtrl.invalid && phoneCtrl.touched) {
+        <span class="uf-error">Enter a valid phone number (7–20 chars).</span>
+      }
+    </div>
+
+    <!-- Role -->
+    <div class="uf-field">
+      <label class="uf-label" for="uf-role">Role <span class="uf-required">*</span></label>
+      <select id="uf-role" class="uf-select" formControlName="role">
+        @for (role of roles; track role) {
+          <option [value]="role">{{ role }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Actions -->
+    <div class="uf-dialog__actions">
+      <lib-button label="Cancel"  type="secondary" (onClick)="onCancel()"></lib-button>
+      <lib-button [label]="isEditMode ? 'Save Changes' : 'Create User'" type="primary" (onClick)="onSubmit()"></lib-button>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,20 @@
+<header class="ud-header">
+  <!-- Brand -->
+  <div class="ud-header__brand">
+    <span class="ud-header__logo">RIB</span>
+    <span class="ud-header__tagline">Resource Intelligence Board</span>
+  </div>
+
+  <!-- Right section -->
+  <div class="ud-header__right">
+    <div class="ud-header__user">
+      <span class="ud-header__avatar">{{ username.charAt(0).toUpperCase() }}</span>
+      <span class="ud-header__welcome">Welcome, <strong>{{ username }}</strong></span>
+    </div>
+    <button class="ud-header__logout-btn" (click)="onLogout()" title="Logout">
+      <span class="ud-header__logout-icon">⏻</span>
+      <span>Logout</span>
+    </button>
+  </div>
+</header>
+

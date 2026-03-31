@@ -1,0 +1,19 @@
+<nav class="ud-sidebar">
+  <ul class="ud-sidebar__menu">
+    @for (item of navItems; track item.id) {
+      <li
+        class="ud-sidebar__item"
+        [class.ud-sidebar__item--active]="activeView === item.id"
+        (click)="onNavClick(item)"
+        [attr.aria-current]="activeView === item.id ? 'page' : null">
+        <span class="ud-sidebar__icon">{{ item.icon }}</span>
+        <span class="ud-sidebar__label">{{ item.label }}</span>
+      </li>
+    }
+  </ul>
+
+  <div class="ud-sidebar__footer">
+    <span class="ud-sidebar__version">MFE Pro v1.0</span>
+  </div>
+</nav>
+

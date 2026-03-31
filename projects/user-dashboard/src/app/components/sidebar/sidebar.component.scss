@@ -1,0 +1,63 @@
+.ud-sidebar {
+  width: 230px;
+  min-width: 230px;
+  height: 100%;
+  background: #1e293b;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+
+  &__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.25rem;
+    cursor: pointer;
+    color: #94a3b8;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    user-select: none;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #e2e8f0;
+    }
+
+    &--active {
+      background: rgba(21, 101, 192, 0.2);
+      color: #60a5fa;
+      border-left-color: #1565c0;
+      font-weight: 600;
+    }
+  }
+
+  &__icon {
+    font-size: 1.15rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+  }
+
+  &__footer {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  &__version {
+    font-size: 0.7rem;
+    color: #475569;
+  }
+}
+
